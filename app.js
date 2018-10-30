@@ -1,5 +1,8 @@
 
-let score, scores, activePlayer, gamePlaying;
+let score;
+let scores;
+let activePlayer;
+let gamePlaying;
 
 init();
 
@@ -8,11 +11,11 @@ document.querySelector('.btn-roll').addEventListener('click', () => {
         let dice = Math.floor(Math.random() * 6) + 1;
         let diceDOM = document.querySelector('.dice');
         diceDOM.style.display = "block";
-        diceDOM.src = 'dice-' + dice + '.png';
+        diceDOM.src = `dice-${dice}.png`;
 
         if (dice !== 1) {
             roundScore += dice;
-            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+            document.querySelector(`#current-${activePlayer}`).textContent = roundScore;
         } else {
             nextPlayer();
         }
@@ -23,13 +26,13 @@ document.querySelector('.btn-roll').addEventListener('click', () => {
 document.querySelector('.btn-hold').addEventListener('click', () => {
     if(gamePlaying) {
         scores[activePlayer] += roundScore;
-        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+        document.querySelector(`#score-${activePlayer}`).textContent = scores[activePlayer];
 
         if (scores[activePlayer] >= 50) {
-            document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
+            document.querySelector(`#name-${activePlayer}`).textContent = 'Winner!';
             document.querySelector('.dice').style.display = 'none';
-            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
-            document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+            document.querySelector(`.player-${activePlayer}-panel`).classList.add('winner');
+            document.querySelector(`.player-${activePlayer}-panel`).classList.remove('active');
             gamePlaying = false;
         } else {
             nextPlayer();
@@ -80,5 +83,3 @@ function init() {
 
 
 }
-//document.querySelector('#current-' + activePlayer).textContent = dice;
-//document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
